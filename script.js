@@ -374,7 +374,7 @@ function showCat(filename) {
         'cartas_de_amor.txt': 'Carmen, cada palabra que te escribo viene desde lo más profundo de mi corazón. Eres mi todo.',
         'promesas.txt': 'Prometo amarte cada día, en los buenos y malos momentos. Prometo estar a tu lado siempre.',
         'futuro_juntos.txt': 'Veo un futuro hermoso a tu lado. Juntos podemos lograr cualquier cosa.',
-        'razones_para_amar.txt': 'Tus razones para amar son infinitas: tu sonrisa, tu forma de ser, tu corazón generoso...'
+        'razones_para_amar.txt': 'Tus razones para amar son infinitas: tu risa, tu esencia, y esa magia que dejas en todo lo que tocas…'
     };
     
     if (files[filename]) {
