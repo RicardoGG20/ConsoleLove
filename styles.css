@@ -1,0 +1,328 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+    background: linear-gradient(135deg, #1e1e2e 0%, #2d1b3d 50%, #1a1a2e 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    overflow-x: hidden;
+}
+
+.terminal-container {
+    width: 100%;
+    max-width: 900px;
+    background: #0d1117;
+    border-radius: 8px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    max-height: 700px;
+}
+
+.terminal-header {
+    background: linear-gradient(180deg, #21262d 0%, #161b22 100%);
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.btn-close {
+    background: #ff5f56;
+}
+
+.btn-minimize {
+    background: #ffbd2e;
+}
+
+.btn-maximize {
+    background: #27c93f;
+}
+
+.terminal-title {
+    color: #c9d1d9;
+    font-size: 13px;
+    flex: 1;
+    text-align: center;
+    font-weight: 500;
+}
+
+.terminal-body {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background: #0d1117;
+    color: #c9d1d9;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.terminal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+    background: #161b22;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+    background: #484f58;
+}
+
+.welcome-message {
+    margin-bottom: 20px;
+}
+
+.welcome-message pre {
+    color: #ff79c6;
+    font-size: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.welcome-message p {
+    margin: 10px 0;
+    color: #c9d1d9;
+}
+
+.command-hint {
+    color: #50fa7b;
+    font-weight: bold;
+}
+
+.command-line {
+    margin: 10px 0;
+    word-wrap: break-word;
+}
+
+.command-input {
+    color: #50fa7b;
+}
+
+.command-output {
+    color: #c9d1d9;
+    margin-top: 5px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.command-error {
+    color: #ff5555;
+}
+
+.command-success {
+    color: #50fa7b;
+}
+
+.command-love {
+    color: #ff79c6;
+    font-style: italic;
+    padding: 15px;
+    background: rgba(255, 121, 198, 0.1);
+    border-left: 3px solid #ff79c6;
+    margin: 10px 0;
+    border-radius: 4px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.command-date {
+    color: #bd93f9;
+}
+
+.command-history-item {
+    color: #8be9fd;
+    margin: 5px 0;
+    padding-left: 20px;
+}
+
+.terminal-input-container {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #161b22;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prompt {
+    color: #50fa7b;
+    margin-right: 10px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.terminal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #c9d1d9;
+    font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+    font-size: 14px;
+    outline: none;
+    caret-color: #50fa7b;
+}
+
+.terminal-input::placeholder {
+    color: #484f58;
+}
+
+.help-command {
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(80, 250, 123, 0.05);
+    border-left: 3px solid #50fa7b;
+    border-radius: 4px;
+}
+
+.help-command strong {
+    color: #50fa7b;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.help-command span {
+    color: #c9d1d9;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes typewriter {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+.typewriter {
+    overflow: hidden;
+    border-right: 2px solid #ff79c6;
+    white-space: nowrap;
+    animation: typewriter 2s steps(40, end), blink 0.75s step-end infinite;
+}
+
+@keyframes blink {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #ff79c6;
+    }
+}
+
+.heart {
+    color: #ff79c6;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    body {
+        padding: 5px;
+    }
+
+    .terminal-container {
+        height: 95vh;
+        max-height: none;
+        border-radius: 0;
+    }
+
+    .terminal-header {
+        padding: 8px 10px;
+    }
+
+    .terminal-title {
+        font-size: 11px;
+    }
+
+    .terminal-body {
+        padding: 15px;
+        font-size: 13px;
+    }
+
+    .welcome-message pre {
+        font-size: 10px;
+    }
+
+    .terminal-input-container {
+        padding: 10px;
+    }
+
+    .prompt {
+        font-size: 12px;
+        margin-right: 5px;
+    }
+
+    .terminal-input {
+        font-size: 13px;
+    }
+
+    .help-command strong {
+        min-width: 100px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal-body {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .welcome-message pre {
+        font-size: 8px;
+    }
+
+    .help-command strong {
+        min-width: 80px;
+        display: block;
+        margin-bottom: 5px;
+    }
+}
