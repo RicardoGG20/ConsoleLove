@@ -2,6 +2,24 @@
 const START_DATE = new Date('2024-05-05');
 const CARMEN_NAME = 'Carmen';
 
+// Lista de fotos de nuestros momentos especiales
+const FOTOS = [
+    'img1.jpg',
+    'img2.jpg',
+    'img3.jpg',
+    'img4.jpg',
+    'img5.jpg',
+    'img6.jpg',
+    'img7.jpg',
+    'img8.jpg',
+    'img9.jpg',
+    'img10.jpg',
+    'img11.jpg'
+];
+
+// Índice de foto actual para slideshow
+let currentPhotoIndex = 0;
+
 // Frases románticas para el comando 'love'
 const LOVE_MESSAGES = [
     "Carmen, desde el 5 de mayo de 2024, cada día contigo ha sido un descubrimiento hermoso. Eres mi razón para sonreír.",
@@ -222,6 +240,37 @@ function executeCommand(command) {
         case 'quit':
             showExit();
             break;
+        case 'fotos':
+        case 'recuerdos':
+        case 'memorias':
+        case 'photos':
+            showFotos();
+            break;
+        case 'foto':
+        case 'photo':
+            if (args.length > 0) {
+                const num = parseInt(args[0]);
+                if (!isNaN(num) && num >= 1 && num <= FOTOS.length) {
+                    showFoto(num);
+                } else {
+                    showError(`Foto no encontrada. Disponibles: 1-${FOTOS.length}`);
+                }
+            } else {
+                showFoto(currentPhotoIndex + 1);
+            }
+            break;
+        case 'slideshow':
+        case 'carrusel':
+            startSlideshow();
+            break;
+        case 'next':
+        case 'siguiente':
+            nextFoto();
+            break;
+        case 'prev':
+        case 'anterior':
+            prevFoto();
+            break;
         default:
             showError(`Comando no encontrado: ${command}. Escribe 'help' para ver los comandos disponibles.`);
     }
@@ -288,8 +337,13 @@ function showHelp() {
 <strong>secreto</strong> <span>Un secreto especial</span><br>
 <strong>promesa</strong> <span>Una promesa de amor</span><br>
 <strong>motivo</strong> <span>El motivo de mi amor</span><br>
-<strong>futuro</strong> <span>Nuestro futuro juntos</span><br>
-<strong>exit</strong> <span>Salir (pero no querrás hacerlo)</span>
+        <strong>futuro</strong> <span>Nuestro futuro juntos</span><br>
+        <strong>fotos</strong> <span>Muestra todas nuestras fotos especiales</span><br>
+        <strong>foto [número]</strong> <span>Muestra una foto específica (1-${FOTOS.length})</span><br>
+        <strong>slideshow</strong> <span>Carrusel automático de nuestras fotos</span><br>
+        <strong>next / siguiente</strong> <span>Siguiente foto</span><br>
+        <strong>prev / anterior</strong> <span>Foto anterior</span><br>
+        <strong>exit</strong> <span>Salir (pero no querrás hacerlo)</span>
 </div>
     `;
     addOutput(help);
@@ -543,6 +597,120 @@ function showFuture() {
 
 function showExit() {
     addOutput(`<div class="command-love">No quiero que te vayas, Carmen 💕<br>Pero si debes irte, recuerda que siempre estaré aquí para ti.<br>Escribe cualquier comando para volver.</div>`);
+}
+
+// Funciones para mostrar fotos
+function showFotos() {
+    let galleryHTML = `
+        <div class="fotos-gallery">
+            <div class="gallery-header">
+                <h3>💕 Nuestros Recuerdos Especiales 💕</h3>
+                <p>Cada foto es un momento que guardo en mi corazón</p>
+            </div>
+            <div class="fotos-grid">
+    `;
+    
+    FOTOS.forEach((foto, index) => {
+        galleryHTML += `
+            <div class="foto-item" onclick="showFotoModal(${index + 1})">
+                <img src="${foto}" alt="Recuerdo ${index + 1}" loading="lazy">
+                <div class="foto-overlay">
+                    <span class="foto-number">Foto ${index + 1}</span>
+                </div>
+            </div>
+        `;
+    });
+    
+    galleryHTML += `
+            </div>
+            <div class="gallery-footer" style="line-height: 0.1 !important;">
+                <p>Escribe <strong>foto [número]</strong> para ver una foto específica</p>
+                <p>Escribe <strong>slideshow</strong> para ver un carrusel automático</p>
+            </div>
+        </div>
+    `;
+    
+    addOutput(galleryHTML);
+}
+
+function showFoto(num) {
+    if (num < 1 || num > FOTOS.length) {
+        showError(`Foto no encontrada. Disponibles: 1-${FOTOS.length}`);
+        return;
+    }
+    
+    currentPhotoIndex = num - 1;
+    const foto = FOTOS[currentPhotoIndex];
+    
+    const fotoHTML = `
+        <div class="foto-container">
+            <div class="foto-header">
+                <span class="foto-title">💕 Recuerdo ${num} de ${FOTOS.length} 💕</span>
+                <div class="foto-controls">
+                    ${num > 1 ? `<button onclick="showFotoModal(${num - 1})" class="foto-btn">← Anterior</button>` : ''}
+                    ${num < FOTOS.length ? `<button onclick="showFotoModal(${num + 1})" class="foto-btn">Siguiente →</button>` : ''}
+                </div>
+            </div>
+            <div class="foto-wrapper">
+                <img src="${foto}" alt="Recuerdo ${num}" class="foto-display">
+                <div class="foto-message" style="line-height: 0.1 !important;">
+                    <p>Un momento especial que guardo en mi corazón 💕</p>
+                    <p>Cada foto con mi capullito es un tesoro</p>
+                </div>
+            </div>
+            <div class="foto-nav">
+                ${num > 1 ? `<button onclick="showFotoModal(${num - 1})" class="nav-btn">◀</button>` : '<span class="nav-btn disabled">◀</span>'}
+                <span class="nav-info">${num} / ${FOTOS.length}</span>
+                ${num < FOTOS.length ? `<button onclick="showFotoModal(${num + 1})" class="nav-btn">▶</button>` : '<span class="nav-btn disabled">▶</span>'}
+            </div>
+        </div>
+    `;
+    
+    addOutput(fotoHTML);
+    scrollToBottom();
+}
+
+// Función global para mostrar foto desde el onclick (necesaria para onclick)
+window.showFotoModal = function(num) {
+    // Limpiar cualquier foto previa
+    const existing = document.querySelectorAll('.foto-container, .fotos-gallery');
+    existing.forEach(el => el.remove());
+    
+    // Mostrar la foto directamente
+    showFoto(num);
+    scrollToBottom();
+};
+
+function nextFoto() {
+    currentPhotoIndex = (currentPhotoIndex + 1) % FOTOS.length;
+    showFoto(currentPhotoIndex + 1);
+}
+
+function prevFoto() {
+    currentPhotoIndex = (currentPhotoIndex - 1 + FOTOS.length) % FOTOS.length;
+    showFoto(currentPhotoIndex + 1);
+}
+
+let slideshowInterval = null;
+
+function startSlideshow() {
+    if (slideshowInterval) {
+        clearInterval(slideshowInterval);
+        slideshowInterval = null;
+        addOutput('<div class="command-success">Slideshow detenido</div>');
+        return;
+    }
+    
+    addOutput('<div class="command-success">Iniciando slideshow... Escribe "slideshow" nuevamente para detenerlo 💕</div>');
+    
+    // Mostrar primera foto
+    currentPhotoIndex = 0;
+    showFoto(1);
+    
+    // Cambiar foto cada 5 segundos
+    slideshowInterval = setInterval(() => {
+        nextFoto();
+    }, 5000);
 }
 
 // Prevenir que la página se recargue al presionar Enter
