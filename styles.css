@@ -647,3 +647,220 @@ body {
         font-size: 14px;
     }
 }
+
+/* Estilos para las canciones */
+.canciones-container {
+    margin: 20px 0;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.canciones-header {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ff79c6;
+}
+
+.canciones-header h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #ff79c6;
+}
+
+.canciones-header p {
+    color: #c9d1d9;
+    font-size: 14px;
+}
+
+.canciones-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.cancion-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #161b22;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 121, 198, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancion-item:hover {
+    background: rgba(255, 121, 198, 0.1);
+    border-color: #ff79c6;
+    transform: translateX(5px);
+}
+
+.cancion-icon {
+    font-size: 24px;
+    color: #ff79c6;
+}
+
+.cancion-info {
+    flex: 1;
+}
+
+.cancion-title {
+    color: #ff79c6;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.cancion-artista {
+    color: #c9d1d9;
+    font-size: 12px;
+}
+
+.cancion-arrow {
+    color: #ff79c6;
+    font-size: 18px;
+}
+
+.canciones-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #c9d1d9;
+    font-size: 12px;
+}
+
+.canciones-footer p {
+    margin: 5px 0;
+}
+
+.cancion-container {
+    margin: 20px 0;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.cancion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 121, 198, 0.2);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.cancion-header-info {
+    flex: 1;
+}
+
+.cancion-titulo-display {
+    color: #ff79c6;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.cancion-meta {
+    color: #c9d1d9;
+    font-size: 14px;
+}
+
+.cancion-back-btn {
+    background: rgba(255, 121, 198, 0.2);
+    border: 1px solid #ff79c6;
+    color: #ff79c6;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+    font-size: 12px;
+    transition: all 0.3s ease;
+}
+
+.cancion-back-btn:hover {
+    background: rgba(255, 121, 198, 0.4);
+    transform: translateY(-2px);
+}
+
+.cancion-letra-container {
+    background: #161b22;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid rgba(255, 121, 198, 0.2);
+    max-width: 100%;
+}
+
+.cancion-letra {
+    color: #c9d1d9;
+    font-size: 15px;
+    line-height: 1.8;
+    white-space: pre-line;
+    margin-bottom: 20px;
+}
+
+.cancion-letra p {
+    margin: 8px 0;
+    color: #c9d1d9;
+}
+
+.cancion-message {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 121, 198, 0.2);
+    color: #ff79c6;
+    font-style: italic;
+}
+
+.cancion-message p {
+    margin: 8px 0;
+    color: #ff79c6;
+}
+
+/* Responsive para canciones */
+@media (max-width: 768px) {
+    .cancion-titulo-display {
+        font-size: 18px;
+    }
+
+    .cancion-letra {
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    .cancion-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cancion-back-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .cancion-item {
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .cancion-icon {
+        font-size: 20px;
+    }
+
+    .cancion-title {
+        font-size: 14px;
+    }
+
+    .cancion-artista {
+        font-size: 11px;
+    }
+
+    .cancion-letra {
+        font-size: 13px;
+        padding: 15px;
+    }
+
+    .cancion-titulo-display {
+        font-size: 16px;
+    }
+}

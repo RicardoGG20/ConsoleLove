@@ -20,6 +20,37 @@ const FOTOS = [
 // Índice de foto actual para slideshow
 let currentPhotoIndex = 0;
 
+// Letras de canciones que le he cantado a Carmen (solo partes con más sentimiento)
+const CANCIONES = {
+    'imbranato': {
+        titulo: 'Imbranato - Tiziano Ferro',
+        artista: 'Tiziano Ferro',
+        idioma: 'Italiano',
+        letra: `E scusami se rido, dall'imbarazzo cedo
+Ti guardo fisso e tremo
+All'idea di averti accanto e sentirmi tuo soltanto
+E sono qui che parlo emozionato`
+    },
+    'algo contigo': {
+        titulo: 'Algo Contigo',
+        artista: 'Vicentico / Los Fabulosos Cadillacs',
+        idioma: 'Español',
+        letra: `¿Hace falta que te diga
+Que me muero por tener algo contigo?
+¿Es que no te has dado cuenta
+De lo mucho que me cuesta ser tu amigo?`
+    },
+    'nunca tuve tanto': {
+        titulo: 'Nunca Tuve Tanto',
+        artista: 'Nampa',
+        idioma: 'Español',
+        letra: `Tú sabes, mi flaca, que por ti daría la vuelta completa a la esfera
+Mi cuerpo es tuyo, mi alma también, conmigo haz lo que quieras
+Lo acepto, lo cuido, lo llevo conmigo y no lo tomo a la ligera
+Contigo entendí que se vale el error y quererse de todas maneras`
+    },
+};
+
 // Frases románticas para el comando 'love'
 const LOVE_MESSAGES = [
     "Carmen, desde el 5 de mayo de 2024, cada día contigo ha sido un descubrimiento hermoso. Eres mi razón para sonreír.",
@@ -271,6 +302,15 @@ function executeCommand(command) {
         case 'anterior':
             prevFoto();
             break;
+        case 'cancion':
+        case 'canción':
+        case 'canciones':
+        case 'letra':
+        case 'letras':
+        case 'song':
+        case 'songs':
+            showCancionAleatoria();
+            break;
         default:
             showError(`Comando no encontrado: ${command}. Escribe 'help' para ver los comandos disponibles.`);
     }
@@ -343,6 +383,8 @@ function showHelp() {
         <strong>slideshow</strong> <span>Carrusel automático de nuestras fotos</span><br>
         <strong>next / siguiente</strong> <span>Siguiente foto</span><br>
         <strong>prev / anterior</strong> <span>Foto anterior</span><br>
+        <strong>canción</strong> <span>Muestra una canción al azar que te he cantado 💕</span><br>
+        <strong>canción [nombre]</strong> <span>Muestra la letra de una canción específica</span><br>
         <strong>exit</strong> <span>Salir (pero no querrás hacerlo)</span>
 </div>
     `;
@@ -711,6 +753,18 @@ function startSlideshow() {
     slideshowInterval = setInterval(() => {
         nextFoto();
     }, 5000);
+}
+
+// Función para mostrar una canción aleatoria
+function showCancionAleatoria() {
+    const cancionesKeys = Object.keys(CANCIONES);
+    const randomKey = cancionesKeys[Math.floor(Math.random() * cancionesKeys.length)];
+    const cancion = CANCIONES[randomKey];
+    
+    const mensaje = `¿Te acuerdas cuando te canté esta canción? Tus ojitos brillaron 💕<br><br><strong>${cancion.titulo}</strong> - ${cancion.artista}<br><br>${cancion.letra}`;
+    
+    addOutput(`<div class="command-love">${mensaje}</div>`);
+    scrollToBottom();
 }
 
 // Prevenir que la página se recargue al presionar Enter
